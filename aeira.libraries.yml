@@ -1,5 +1,5 @@
 global-styling:
-  version: VERSION
+  version: VERSION 
   js:
     js/global.js: {}
   css:
