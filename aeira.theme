@@ -1,34 +1,81 @@
 <?php
 
-/**
- * @file
- * Functions to support theming in the SASS Starterkit subtheme.
- */
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Component\Utility\Xss;
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Url;
+use Drupal\Core\Render\Element;
+use Drupal\file\Entity\File;
 
-use Drupal\Core\Form\FormStateInterface;
 
-/**
- * Implements hook_form_system_theme_settings_alter() for settings form.
- *
- * Replace Barrio setting options with subtheme ones.
- *
- * Example on how to alter theme settings form
- */
-function aeira_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
-  $form['components']['navbar']['bootstrap_barrio_navbar_top_background']['#options'] = [
-    'bg-primary' => t('Primary'),
-    'bg-secondary' => t('Secondary'),
-    'bg-light' => t('Light'),
-    'bg-dark' => t('Dark'),
-    'bg-white' => t('White'),
-    'bg-transparent' => t('Transparent'),
-  ];
-  $form['components']['navbar']['bootstrap_barrio_navbar_background']['#options'] = [
-    'bg-primary' => t('Primary'),
-    'bg-secondary' => t('Secondary'),
-    'bg-light' => t('Light'),
-    'bg-dark' => t('Dark'),
-    'bg-white' => t('White'),
-    'bg-transparent' => t('Transparent'),
-  ];
+ 
+function aeira_preprocess_page(&$variables) {
+  global $base_url, $base_path;
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+  $variables['site_slogan'] = $config->get('slogan');
+  
+
+ 
+  $variables['logopath'] = file_url_transform_relative(file_create_url(theme_get_setting('logo.url')));
+
+
+  $variables['nome_asociacion'] = theme_get_setting('nome_asociacion');
+  $variables['url_asociacion'] = theme_get_setting('url_asociacion');
+ 
+ 
+  $fid = theme_get_setting("imaxe_principal", "aeira");
+  if (!empty($fid)) {
+    $file = File::load($fid[0]);
+    $uri = $file->getFileUri();
+    $image_path = file_create_url($uri);
+    
+   }
+ else {
+    $image_path = drupal_get_path('theme', 'aeira') . 'default.jpg';
+   }
+   $variables['imaxe_principal'] = $image_path;
+
+  $fid = theme_get_setting("logo_promotor", "aeira");
+
+  $image_path = array();
+
+  if (!empty($fid)) {
+      for ($i=0; $i < count($fid); $i++) { 
+        $file = File::load($fid[$i]);
+        $uri = $file->getFileUri();       
+        array_push($image_path,file_create_url($uri));       
+      }
+     $variables['logo_promotor'] = $image_path ;
+    
+   }
+   $fid = theme_get_setting("logo_patrocinador", "aeira");
+   $image_path = array();
+   if (!empty($fid)) {
+       for ($i=0; $i < count($fid); $i++) { 
+         $file = File::load($fid[$i]);
+         $uri = $file->getFileUri();       
+         array_push($image_path,file_create_url($uri));       
+       }
+      $variables['logo_patrocinador'] = $image_path ;
+     
+    }
+  
+
+     
 } 
+     
+
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ *
+ * @hook: form
+ * @suggestion: search_block_form
+ * @result: loads template form--search_block_form.html.twig
+ */
+function aeira_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+  if ($variables['element']['#form_id'] == 'search_block_form') {
+    $suggestions[] = 'form__search_block_form';
+  }
+}

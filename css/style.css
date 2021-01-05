@@ -1,0 +1,26 @@
+/**
+ * @file
+ * Subtheme specific CSS.
+ */
+
+.centrar {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.slogan{
+    position: absolute;
+    left: 40%;
+    color: #fff;
+}
+.site-footer{
+    background-color: #fff !important;
+    padding: 15px 0 15px ;
+}
+.iconas{
+    max-width: 75%;
+}
+
+
+

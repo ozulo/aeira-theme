@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * Custom Search form template
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ * - element: Not documented but exits, need to find out more
+ *
+ * @see template_preprocess_form()
+ * @why the default call of `{{ children }}` calls a "container.twig.html"
+ *      instead of the form elements itself "input.twig.html"
+ *      its technically not necessary to have container markup arround
+ *      label, text input and submit button and its a drawback for
+ *      extended CSS layouts that get way more complex on such markup
+ */
+#}
+{# extend element attributes (taken from bartik) #}
+{%
+  set attributes = attributes.addClass('search-form', 'search-block-form')
+%}
+{# create attributes for the search input field by system variable #}
+{%
+  set input_attributes = create_attribute(element.keys['#attributes'])
+%}
+{# extend attributes for the search input field #}
+{%
+  set input_attributes = input_attributes.setAttribute('placeholder', element.keys['#title'])
+%}
+{# create attributes for the search submit button by system variable #}
+{%
+  set submit_attributes = create_attribute(element.actions['submit']['#attributes'])
+%}
+<form{{ attributes }}>
+ <!-- <button class="material-icons button js-form-submit form-submit btn btn-primary" data-drupal-selector="edit-submit-search" type="submit" id="edit-submit-search" value="search">search</button>
+    <button type="button" class="btn btn-outline-secondary waves-effect px-3"></button>-->
+ 
+  <input{{ input_attributes }} />
+ 
+</form>
