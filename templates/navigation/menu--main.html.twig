@@ -66,7 +66,8 @@
          
        
           {% set title %}
-            <img src="/themes/custom/aeira-theme/iconas/{{ item.title | lower  ~ '.png'}}" width="30" height="30" class="d-inline-block align-top" alt=""> {{ item.title }}
+                      <img src="/themes/custom/vavi/iconas/{{ item.title | replace({' ': '_'}) | lower  ~ '.png'}}" width="30" height="30" class="d-inline-block align-top" alt=""> {{ item.title }}
+
            {% endset %}
 
           {{ link(title, item.url, {'class': link_classes}) }}
