@@ -69,3 +69,26 @@
 }
 
 /* end view elementos */
+
+/* node elemento*/
+.logoElemento img {padding-left: 1em;}
+
+.lendaNode  {
+    padding-top: 1.5em;
+    
+}
+.lugar {
+    font-size: 12px;
+}
+.list-group-item {
+border: 0;
+padding: 0;
+}
+.informacion {margin-top: 2em;}
+.informacion span {
+    font-size: 10px;
+}
+.informacion h3 {color: #ff8f72;}
+.list-group-flush {padding-left: 0;}
+
+/* fin node elemento*/
