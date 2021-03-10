@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Theme override to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ */
+#}
+{% if title %}
+    <h3>{{ title }}</h3>
+{% endif %}
+<div id="elementos" {{ attributes.addClass(classes) }}>
+  <div class="row image-grid">
+      {% for key,row in rows %}
+          {% set row_classes = [
+              default_row_class ? 'views-row',
+          ] %}
+      <div class="col-sm-6 col-xs-4 col-md-4 col-lg-3">
+         <div class="panel panel-default vistaElementos">
+         {{ view.style_plugin.getField(key, 'field_tipo_elemento') }}
+              <div class="imaxe_elemento">       
+                {{ view.style_plugin.getField(key, 'field_imaxe_elemento') }}
+              </div> 
+              <div class="d-flex  p-2 lenda">
+              <div class="w-75">
+                  {{ view.style_plugin.getField(key, 'title') }}
+                  {{ view.style_plugin.getField(key, 'field_lugar_elemento') }} 
+                  
+                  </div>
+                  <div class="w-25 text-right">
+                  {{ view.style_plugin.getField(key, 'field_acceso_elemento') }}
+                  </div>
+              </div>
+	        </div>
+       </div>
+      {% endfor %}
+  </div>
+</div>
+
+

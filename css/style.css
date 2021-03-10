@@ -2,7 +2,7 @@
  * @file
  * Subtheme specific CSS.
  */
-
+/* estilos sobre frontpage */
 .centrar {
     position: absolute;
     left: 50%;
@@ -23,4 +23,49 @@
 }
 
 
+/* end frontpage */
 
+/* Estislos sobre a view  Elementos  */
+#elementos   {
+    background-color: #e9e6e2;
+} 
+.imgCatalogo{
+    height: auto;
+    width: auto;
+    max-width: 280px;
+    max-height: 300px;
+}
+.cajetin {
+    background-color: cadetblue;
+}
+.tipo img{
+    position: absolute;
+    background-color:#fff;
+    border-radius: 18px 0 15px 0;
+    padding: 5px;
+}
+
+.imaxe_elemento img {
+    min-height: 200px;
+    min-width: 250px;
+    border-radius: 20px 20px 0 0;
+}
+/* este estilo viene con el Barrio*/
+.offset-md-2 {
+    margin-left: 0;
+}
+/* se elimina la barra azul del tema Barrio */
+#navbar-main{
+    display: none;
+}
+.vistaElementos:hover{
+    border-radius: 20px;
+    border: 2px solid rgb(245, 119, 17);
+}
+.vistaElementos { margin-top: 2em;}
+.lenda {
+    background-color: #fff;
+    border-radius: 0 0 20px 20px;
+}
+
+/* end view elementos */
